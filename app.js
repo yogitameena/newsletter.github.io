@@ -39,11 +39,14 @@ app.post("/", function(req, res)
     const url = "https://us13.api.mailchimp.com/3.0/lists/3c1974c193";
     const options = {
         method: "POST",
-        auth: "yogita:1f0cf310e2d557e4c1e78ef76e07be9d-us13"
+        auth: process.env.APIKEY
     }
+
+    console.log(options)
 
     const request = https.request(url, options, function(response)
     {
+        // console.log(response);
 
         if(response.statusCode === 200)
         {
@@ -59,7 +62,7 @@ app.post("/", function(req, res)
          })
     })
     
-   // request.write(jsonData);
+    request.write(jsonData);
     request.end();
 
 });
@@ -73,9 +76,3 @@ app.post("/failure", function(req,res)
 app.listen(PORT, () => {
     console.log(`server started on port ${PORT}`);
   });
-
-// api key 
-// 1f0cf310e2d557e4c1e78ef76e07be9d-us13
-
-// list Id
-// 3c1974c193
